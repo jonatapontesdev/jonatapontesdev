@@ -29,7 +29,11 @@ Com essas belas descrições, decidi cair de cara na área de Desenvolvimento pa
 </div></br>-->
 <div style="display: inline_block">
    <a href="https://github.com/jonatapontesdev">
-  <img align="center" src="https://skillicons.dev/icons?i=js,html,css,php,mysql&perline=4">
+  <img align="center" src="https://skillicons.dev/icons?i=html,css,js,php,mysql&perline=3">
+</div></br>
+<div style="display: inline_block">
+   <a href="https://github.com/jonatapontesdev">
+  <img align="center" src="https://skillicons.dev/icons?i=py,qt,django&perline=4">
 </div>
 <div style="display: inline_block"><br>
    <a href="https://github.com/jonatapontesdev">
