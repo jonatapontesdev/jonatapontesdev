@@ -7,7 +7,6 @@ on:
     # Será atualizado a cada 5 horas.
     - cron: "0 */5 * * *"
 
-# Permite executar na lista de Actions (utilizado para testes de build).
   workflow_dispatch:
 
 # Regras
@@ -16,29 +15,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # Checks repo under $GITHUB_WORKSHOP, so your job can access it
+      # Usar a versão mais recente do actions/checkout
       - uses: actions/checkout@v3
 
-      # Repositório que será utilizado para gerar os arquivos.
+      # Usar a ação Platane/snk para gerar os arquivos GIF e SVG da cobra
       - uses: Platane/snk@master
         id: snake-gif
         with:
-          github_user_name: jonatapontesdev # Seu usuário
+          github_user_name: jonatapontesdev # Substitua pelo seu nome de usuário correto
           gif_out_path: dist/github-contribution-grid-snake.gif
           svg_out_path: dist/github-contribution-grid-snake.svg
 
+      # Verifica o status do repositório
       - run: git status
 
-      # Para as atualizações.
+      # Atualiza a ação github-push-action para uma versão mais recente
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: "Atualizando grid da cobra"
           branch: master
-          force: true
+          file_pattern: dist/*
 
+      # Atualiza a ação de deploy para o GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2.7.0
+        uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: output
           build_dir: dist
