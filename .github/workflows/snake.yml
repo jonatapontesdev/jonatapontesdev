@@ -14,8 +14,10 @@ jobs:
       - name: Clean dist directory
         run: rm -rf dist/*
 
-      - name: Fetch latest changes
-        run: git pull origin master --rebase
+      - name: Resolve conflicts by keeping local changes
+        run: |
+          git rebase --abort || true
+          git pull origin master --rebase --strategy-option=ours
 
       - uses: Platane/snk@master
         id: snake-gif
@@ -27,7 +29,7 @@ jobs:
       - run: git status
 
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4  # Verifique se há atualizações
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Atualizando grid da cobra"
           branch: master
