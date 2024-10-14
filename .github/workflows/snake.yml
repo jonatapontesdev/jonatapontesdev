@@ -14,22 +14,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
-      # Usar a versão mais recente do actions/checkout
       - uses: actions/checkout@v3
 
-      # Usar a ação Platane/snk para gerar os arquivos GIF e SVG da cobra
+      # Limpar o diretório dist/ antes de gerar novos arquivos
+      - name: Clean dist directory
+        run: rm -rf dist/*
+
       - uses: Platane/snk@master
         id: snake-gif
         with:
-          github_user_name: jonatapontesdev # Substitua pelo seu nome de usuário correto
+          github_user_name: jonatapontesdev
           gif_out_path: dist/github-contribution-grid-snake.gif
           svg_out_path: dist/github-contribution-grid-snake.svg
 
-      # Verifica o status do repositório
       - run: git status
 
-      # Atualiza a ação github-push-action para uma versão mais recente
       - name: Push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -37,7 +36,6 @@ jobs:
           branch: master
           file_pattern: dist/*
 
-      # Atualiza a ação de deploy para o GitHub Pages
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v3
         with:
