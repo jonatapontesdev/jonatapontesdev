@@ -1,22 +1,16 @@
-# Nome da Actions:  
 name: Snake Game
 
-# Controlador do tempo que será feito a atualização dos arquivos.
 on:
   schedule:
-    # Será atualizado a cada 5 horas.
-    - cron: "0 */5 * * *"
-
+    - cron: "0 */5 * * *"  # Atualização a cada 5 horas
   workflow_dispatch:
 
-# Regras
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3  # Atualize para v4 se disponível
 
-      # Limpar o diretório dist/ antes de gerar novos arquivos
       - name: Clean dist directory
         run: rm -rf dist/*
 
@@ -30,7 +24,7 @@ jobs:
       - run: git status
 
       - name: Push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4  # Verifique se há atualizações
         with:
           commit_message: "Atualizando grid da cobra"
           branch: master
